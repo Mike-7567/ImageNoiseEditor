@@ -20,6 +20,7 @@ struct SettingsView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             Button("Select png file") {
                 isShowingFilePicker.toggle()
             }
@@ -35,6 +36,7 @@ struct SettingsView: View {
                     isShowingFileExporter.toggle()
                 }
             }
+            Spacer()
         }.fileImporter(isPresented: $isShowingFilePicker, allowedContentTypes: [.png]) { result in
             switch result {
             case .success(let url):
@@ -42,7 +44,7 @@ struct SettingsView: View {
                     LOGGER.error("Could not access file")
                     return
                 }
-                self.inputImage = try? TEXTURE_LOADER.newTexture(URL: url, options: [.SRGB: false, .textureStorageMode: MTLStorageMode.shared.rawValue])
+                self.inputImage = try? TEXTURE_LOADER.newTexture(URL: url, options: [.SRGB: false, .textureStorageMode: MTLStorageMode.shared.rawValue, .textureUsage: MTLTextureUsage.shaderRead.rawValue])
                 url.stopAccessingSecurityScopedResource()
             case .failure:
                 break
@@ -54,6 +56,7 @@ struct SettingsView: View {
             case .failure(let error):
                 LOGGER.error("\(error.localizedDescription)")
             }
-        }
+        }.padding()
+            .border(.bar)
     }
 }

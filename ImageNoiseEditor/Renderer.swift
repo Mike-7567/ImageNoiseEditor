@@ -37,7 +37,7 @@ class Renderer: NSObject, MTKViewDelegate {
         renderEncoder.label = "Render Encoder"
         
         renderEncoder.setSettings(settings)
-        renderEncoder.setVertexBytes(Vertex.quadVerticesTopHalf, length: MemoryLayout<Vertex>.stride * 4, index: 0)
+        renderEncoder.setVertexBytes(Vertex.quadVerticesTopHalfWithSize(width: inputTexture.width, height: inputTexture.height), length: MemoryLayout<Vertex>.stride * 4, index: 0)
         renderEncoder.setRenderPipelineState(RenderPipelineStates.originalRenderPipelineState)
         renderEncoder.setFragmentTexture(inputTexture, index: OriginalTextPos.rawValue)
         renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4)
@@ -48,6 +48,5 @@ class Renderer: NSObject, MTKViewDelegate {
         commandBuffer.present(view.currentDrawable!)
         commandBuffer.commit()
         commandBuffer.waitUntilCompleted()
-        
     }
 }

@@ -13,9 +13,9 @@ struct ContentView: View {
     @Binding var inputImage: MTLTexture?
     
     var body: some View {
-        HStack {
-            PreviewView(settings: $settings, inputImage: $inputImage)
-                .padding()
+        HSplitView {
+            PreviewView(settings: $settings, inputImage: $inputImage).aspectRatio(1, contentMode: .fit)
+                
             SettingsView(settings: $settings, inputImage: $inputImage)
         }
     }

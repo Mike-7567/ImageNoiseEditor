@@ -17,12 +17,14 @@ struct Vertex {
         self.texcoords = texcoords
     }
     
-    static let quadVerticesTopHalf: [Vertex] = [
-        Vertex(position: simd_float3(1, 1, 1), texcoords: simd_float2(1, 1)),
-        Vertex(position: simd_float3(1, 0, 1), texcoords: simd_float2(1, 0)),
-        Vertex(position: simd_float3(0, 1, 1), texcoords: simd_float2(0, 1)),
-        Vertex(position: simd_float3(0, 0, 1), texcoords: simd_float2(0, 0))
-    ]
+    static func quadVerticesTopHalfWithSize(width: Int, height: Int) -> [Vertex] {
+        return [
+            Vertex(position: simd_float3(0.5, 1, 1), texcoords: simd_float2(Float(width), Float(height))),
+            Vertex(position: simd_float3(0.5, 0, 1), texcoords: simd_float2(Float(width), 0)),
+            Vertex(position: simd_float3(-0.5, 1, 1), texcoords: simd_float2(0, Float(height))),
+            Vertex(position: simd_float3(-0.5, 0, 1), texcoords: simd_float2(0, 0))
+        ]
+    }
 
     static let quadVerticesBottemHalf: [Vertex] = [
         Vertex(position: simd_float3(-1, -1, -1), texcoords: simd_float2(1, 1)),

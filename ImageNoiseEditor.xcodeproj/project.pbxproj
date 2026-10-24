@@ -285,7 +285,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = /Users/gabrielthomson/Dev/Projects/ImageNoiseEditor/ImageNoiseEditor/Headers/Shared.h;
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = ImageNoiseEditor/Headers/Shared.h;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -326,7 +326,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = /Users/gabrielthomson/Dev/Projects/ImageNoiseEditor/ImageNoiseEditor/Headers/Shared.h;
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = ImageNoiseEditor/Headers/Shared.h;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 			};
