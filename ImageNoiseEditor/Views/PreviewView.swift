@@ -13,6 +13,7 @@ struct PreviewView: NSViewRepresentable {
     
     @Binding var settings: SettingsStruct
     @Binding var inputImage: MTLTexture?
+    @Binding var outputImage: MTLTexture?
     
     func makeNSView(context: Context) -> some NSView {
         let view = MTKView()
@@ -28,5 +29,6 @@ struct PreviewView: NSViewRepresentable {
     func updateNSView(_ nsView: NSViewType, context: Context) {
         renderer.settings = settings
         renderer.inputTexture = inputImage
+        renderer.outputTexture = outputImage
     }
 }

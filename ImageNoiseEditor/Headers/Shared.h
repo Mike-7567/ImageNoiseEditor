@@ -19,6 +19,7 @@ struct SettingsStruct {
     uint32_t greenOffset;
     uint32_t blueOffset;
     uint32_t sharedOffset;
+    uint8_t skipBlack;
 };
 
 enum BufferPos {

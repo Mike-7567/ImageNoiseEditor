@@ -60,6 +60,17 @@ extension MTLRenderCommandEncoder {
     }
 }
 
+extension MTLComputeCommandEncoder {
+    func setSettings(_ settings: SettingsStruct) {
+        var constants = settings
+        self.setBytes(&constants, length: MemoryLayout<SettingsStruct>.stride, index: SettingsPos.rawValue)
+    }
+    
+    func setBytes(_ bytes: UnsafeRawPointer, length: Int, index: UInt32) {
+        self.setBytes(bytes, length: length, index: Int(index))
+    }
+}
+
 extension MTLVertexAttributeDescriptorArray {
     subscript(index: UInt32) -> MTLVertexAttributeDescriptor! {
         return self[Int(index)]
