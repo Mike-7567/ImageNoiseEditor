@@ -37,8 +37,7 @@ vertex RasterizerData originalVertex(Vertex vertIn [[ stage_in ]]) {
 
 fragment half4 originalFragment(RasterizerData rd [[ stage_in ]], texture2d<float, access::read> text [[ texture(OriginalTextPos) ]]) {
     float4 color = text.read(uint2(rd.texcoords));
-    logger.log("%f %f", rd.texcoords.x, rd.texcoords.y);
-    //color = float4(1.0);
+    
     return half4(color);
 }
 

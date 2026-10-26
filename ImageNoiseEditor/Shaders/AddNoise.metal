@@ -18,9 +18,9 @@ kernel void addNoise(uint2 index [[thread_position_in_grid]], texture2d<float, a
         return;
     }
     
-    float redRandom = goldNoise(float2(index), settings.redOffset + settings.sharedOffset) * settings.redAmplifier * settings.sharedAmplifier;
-    float greenRandom = goldNoise(float2(index), settings.greenOffset + settings.sharedOffset) * settings.greenAmplifier * settings.sharedAmplifier;
-    float blueRandom = goldNoise(float2(index), settings.blueOffset + settings.sharedOffset) * settings.blueAmplifier * settings.sharedAmplifier;
+    float redRandom = (goldNoise(float2(index), settings.redOffset + settings.sharedOffset) * 2 - 1) * settings.redAmplifier * settings.sharedAmplifier;
+    float greenRandom = (goldNoise(float2(index), settings.greenOffset + settings.sharedOffset) * 2 - 1) * settings.greenAmplifier * settings.sharedAmplifier;
+    float blueRandom = (goldNoise(float2(index), settings.blueOffset + settings.sharedOffset) * 2 - 1) * settings.blueAmplifier * settings.sharedAmplifier;
     
     color.r = clamp(redRandom + color.r, 0.0, 1.0);
     color.g = clamp(greenRandom + color.g, 0.0, 1.0);

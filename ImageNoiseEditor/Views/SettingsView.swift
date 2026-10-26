@@ -14,9 +14,10 @@ struct SettingsView: View {
     @State private var isShowingFilePicker: Bool = false
     @State private var isShowingFileExporter: Bool = false
     @State private var outputDoc: PNGDocument?
+    @State private var fileName: String?
+    @State var skipBlackBool: Bool = true
     
     @Binding var settings: SettingsStruct
-    @State var skipBlackBool: Bool = true
     @Binding var inputImage: MTLTexture?
     @Binding var outputImage: MTLTexture?
     
@@ -38,6 +39,9 @@ struct SettingsView: View {
                         outputDoc = doc
                         isShowingFileExporter.toggle()
                     }
+                }
+                Button("Reset Settings") {
+                    settings = DEFAULT_SETTINGS
                 }
                 Toggle("Skip Black", isOn: $skipBlackBool).onChange(of: skipBlackBool) {
                     settings.skipBlack = skipBlackBool ? 1 : 0
@@ -79,10 +83,11 @@ struct SettingsView: View {
                 descriptor.usage = [.shaderWrite, .shaderRead]
                 
                 outputImage = DEVICE.makeTexture(descriptor: descriptor)
+                fileName = url.lastPathComponent
             case .failure:
                 break
             }
-        }.fileExporter(isPresented: $isShowingFileExporter, document: outputDoc, contentType: .png) { result in
+        }.fileExporter(isPresented: $isShowingFileExporter, document: outputDoc, contentType: .png, defaultFilename: fileName) { result in
             switch result {
                 case .success(let url):
                 LOGGER.info("Saved to \(url)")

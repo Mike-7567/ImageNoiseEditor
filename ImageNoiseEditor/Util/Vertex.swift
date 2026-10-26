@@ -19,19 +19,19 @@ struct Vertex {
     
     static func quadVerticesTopHalfWithSize(width: Int, height: Int) -> [Vertex] {
         return [
-            Vertex(position: simd_float3(1, 1, 1), texcoords: simd_float2(Float(width), Float(height))),
-            Vertex(position: simd_float3(1, 0, 1), texcoords: simd_float2(Float(width), 0)),
-            Vertex(position: simd_float3(-1, 1, 1), texcoords: simd_float2(0, Float(height))),
-            Vertex(position: simd_float3(-1, 0, 1), texcoords: simd_float2(0, 0))
+            Vertex(position: simd_float3(1, 1, 1), texcoords: simd_float2(Float(width), 0)),
+            Vertex(position: simd_float3(1, 0, 1), texcoords: simd_float2(Float(width), Float(height))),
+            Vertex(position: simd_float3(-1, 1, 1), texcoords: simd_float2(0, 0)),
+            Vertex(position: simd_float3(-1, 0, 1), texcoords: simd_float2(0, Float(height)))
         ]
     }
     
     static func quadVerticesBottemHalfWithSize(width: Int, height: Int) -> [Vertex] {
         return [
-            Vertex(position: simd_float3(1, 0, 1), texcoords: simd_float2(Float(width), Float(height))),
-            Vertex(position: simd_float3(1, -1, 1), texcoords: simd_float2(Float(width), 0)),
-            Vertex(position: simd_float3(-1, 0, 1), texcoords: simd_float2(0, Float(height))),
-            Vertex(position: simd_float3(-1, -1, 1), texcoords: simd_float2(0, 0))
+            Vertex(position: simd_float3(1, 0, 1), texcoords: simd_float2(Float(width), 0)),
+            Vertex(position: simd_float3(1, -1, 1), texcoords: simd_float2(Float(width), Float(height))),
+            Vertex(position: simd_float3(-1, 0, 1), texcoords: simd_float2(0, 0)),
+            Vertex(position: simd_float3(-1, -1, 1), texcoords: simd_float2(0, Float(height)))
         ]
     }
 
