@@ -66,24 +66,38 @@ struct SettingsView: View {
             NumberInputView(title: "Blue Offset", number: $settings.blueOffset)
             
             Spacer()
-        }.fileImporter(isPresented: $isShowingFilePicker, allowedContentTypes: [.png]) { result in
+        }.fileImporter(isPresented: $isShowingFilePicker, allowedContentTypes: [.png, .jpeg]) { result in
             switch result {
             case .success(let url):
                 guard url.startAccessingSecurityScopedResource() else {
                     LOGGER.error("Could not access file")
                     return
                 }
-                self.inputImage = try? TEXTURE_LOADER.newTexture(URL: url, options: [.SRGB: false, .textureStorageMode: MTLStorageMode.shared.rawValue, .textureUsage: MTLTextureUsage.shaderRead.rawValue])
+                inputImage = try? TEXTURE_LOADER.newTexture(URL: url, options: [.SRGB: false, .textureStorageMode: MTLStorageMode.shared.rawValue, .textureUsage: MTLTextureUsage.shaderRead.rawValue])
                 url.stopAccessingSecurityScopedResource()
+                
+                guard inputImage != nil else {
+                    LOGGER.error("Failed to load \(url)")
+                    return;
+                }
+                
+                let width = inputImage?.width ?? 16
+                let height = inputImage?.height ?? 16
                 
                 let descriptor = MTLTextureDescriptor()
                 descriptor.pixelFormat = Preferences.mainPixelFormat
-                descriptor.width = inputImage?.width ?? 16
-                descriptor.height = inputImage?.height ?? 16
+                descriptor.width = width
+                descriptor.height = height
                 descriptor.usage = [.shaderWrite, .shaderRead]
                 
                 outputImage = DEVICE.makeTexture(descriptor: descriptor)
                 fileName = url.lastPathComponent
+                
+                let aspectRationOfImage = Float(width) / Float(height)
+                
+                let aspectRationOfView = aspectRationOfImage / 2
+                
+                settings.aspectRatio = aspectRationOfView
             case .failure:
                 break
             }

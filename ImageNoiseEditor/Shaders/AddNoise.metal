@@ -14,7 +14,8 @@ kernel void addNoise(uint2 index [[thread_position_in_grid]], texture2d<float, a
     
     float4 color = original.read(index);
     
-    if (settings.skipBlack && color.r == 0.0 && color.g == 0 && color.b == 0) {
+    if (settings.skipBlack && color.a == 0.0) {
+        output.write(float4(0.0), index);
         return;
     }
     

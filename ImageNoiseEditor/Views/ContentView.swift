@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         HSplitView {
             PreviewView(settings: $settings, inputImage: $inputImage, outputImage: $outputImage)
-                .aspectRatio(0.5, contentMode: .fit)
+                .aspectRatio(Double(settings.aspectRatio), contentMode: .fit)
                 .border(.quaternary)
                 
             SettingsView(settings: $settings, inputImage: $inputImage, outputImage: $outputImage)
